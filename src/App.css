@@ -1,38 +1,107 @@
-.App {
-  text-align: center;
+*{
+  box-sizing: border-box;
+  margin: 0px ;   
+  padding: 0px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
+body {
+  width: 100vw;
+  color: #fff;
+  font-size: 20px !important;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+ 
 }
 
-.App-link {
-  color: #61dafb;
+.glass-card {
+  width: 240px;
+  height: 360px;
+  background-color: rgb(223 221 221 / 15%);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 32px rgba(123, 123, 123, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 0px 0px rgba(255, 255, 255, 0);
+  position: relative;
+  overflow: hidden;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.8),
+    transparent
+  );
 }
+
+.glass-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.8),
+    transparent,
+    rgba(255, 255, 255, 0.3)
+  );
+}
+.contentBox{
+  width: 600px;
+  height: auto;
+  padding: 20px;
+  border-radius: 10px;
+}
+/* ListItem */
+.css-5dmg35-MuiButtonBase-root-MuiListItemButton-root:hover {
+    background-color: rgb(243 237 237 / 41%) !important;
+}
+/* ToogleButton */
+.css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root{
+border-radius: 5px !important;
+}
+/* custom iconButton */
+.css-53g0n7-MuiButtonBase-root-MuiIconButton-root {
+  padding: 0px !important;
+}
+
+.css-53g0n7-MuiButtonBase-root-MuiIconButton-root:hover{
+  transform: scale(1.2) !important;
+  color:#125f7d!important;
+  background-color: transparent !important;
+}
+/* custom checkbox */
+.css-1umw9bq-MuiSvgIcon-root{
+  font-size: 1.2rem !important;
+}
+
+.css-1j6lzb4-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked{
+  color:#125f7d !important;
+
+}
+
+/* #icon-button{
+  --IconButton-hoverBg:transparent;
+  border: 1px solid midnightblue;
+  border-radius: 3px;
+  padding: 2px;
+  
+} */
+
+
