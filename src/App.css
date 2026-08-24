@@ -1,6 +1,14 @@
-*{
+:root {
+  --checked-color: rgb(0 0 0 / 23%);
+  --inChecked-color: #c5cae9;
+  --priority-color-m: #ed6c02;
+  --priority-color-h: #d32f2f;
+  --priority-color-l: #2e7d32;
+  --avatar-color: #ddd;
+}
+* {
   box-sizing: border-box;
-  margin: 0px ;   
+  margin: 0px;
   padding: 0px;
 }
 body {
@@ -12,8 +20,18 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
- 
 }
+/* my components */
+.w-castum {
+  width: 80%;
+}
+.rd-10 {
+  border-radius: 10px !important;
+}
+.p-8 {
+  padding: 5px !important;
+}
+/*------ my components */
 
 .glass-card {
   width: 240px;
@@ -24,7 +42,7 @@ body {
   -webkit-backdrop-filter: blur(10px);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 
+  box-shadow:
     0 8px 32px rgba(123, 123, 123, 0.1),
     inset 0 1px 0 rgba(255, 255, 255, 0.5),
     inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -34,7 +52,7 @@ body {
 }
 
 .glass-card::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -49,7 +67,7 @@ body {
 }
 
 .glass-card::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -62,38 +80,50 @@ body {
     rgba(255, 255, 255, 0.3)
   );
 }
-.contentBox{
+.contentBox {
   width: 600px;
   height: auto;
   padding: 20px;
   border-radius: 10px;
 }
 /* ListItem */
-.css-5dmg35-MuiButtonBase-root-MuiListItemButton-root:hover {
-    background-color: rgb(243 237 237 / 41%) !important;
+
+.css-18g885t-MuiButtonBase-root-MuiListItemButton-root {
+  border-radius: 10px !important;
+}
+.css-ansxpy-MuiButtonBase-root-MuiListItemButton-root:hover {
+  background-color: #edeef1ce !important;
+}
+.css-ansxpy-MuiButtonBase-root-MuiListItemButton-root::selection {
+  background-color: #edeef1ce !important;
 }
 /* ToogleButton */
-.css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root{
-border-radius: 5px !important;
+.css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
+  border-radius: 5px !important;
 }
 /* custom iconButton */
 .css-53g0n7-MuiButtonBase-root-MuiIconButton-root {
   padding: 0px !important;
 }
 
-.css-53g0n7-MuiButtonBase-root-MuiIconButton-root:hover{
+.css-53g0n7-MuiButtonBase-root-MuiIconButton-root:hover {
   transform: scale(1.2) !important;
-  color:#125f7d!important;
+  color: #125f7d !important;
   background-color: transparent !important;
 }
 /* custom checkbox */
-.css-1umw9bq-MuiSvgIcon-root{
+.css-1umw9bq-MuiSvgIcon-root {
   font-size: 1.2rem !important;
 }
 
-.css-1j6lzb4-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked{
-  color:#125f7d !important;
+.css-1j6lzb4-MuiButtonBase-root-MuiSwitchBase-root-MuiCheckbox-root.Mui-checked {
+  color: #125f7d !important;
+}
 
+.MuiInputBase-root:has(
+  > .css-1skkqr-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiInput-input
+) {
+  font-size: small;
 }
 
 /* #icon-button{
@@ -103,5 +133,3 @@ border-radius: 5px !important;
   padding: 2px;
   
 } */
-
-
