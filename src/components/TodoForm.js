@@ -20,21 +20,40 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
 
 export default function FormInput() {
-  const [status, setStatus] = useContext(DataContext);
+  const [status, setStatus, globalList, setGlobalList] =
+    useContext(DataContext);
 
   // handleFunctions
-  function handleChangeDate(ev) {
-    setStatus({ ...status, date: ev.target.value });
-  }
-  function handleChangeName(ev) {
-    setStatus({ ...status, name: ev.target.value });
-  }
-
-  const handleChangeSelect = (ev) => {
-    setStatus({ ...status, priority: ev.target.value });
+  const handleChangeDate = (ev) => {
+    const { value } = ev.target;
+    setStatus((prevStatus) => ({ ...prevStatus, date: value }));
+  };
+  const handleChangeName = (ev) => {
+    const { value } = ev.target;
+    setStatus((prevStatus) => ({ ...prevStatus, name: value }));
   };
 
-  // ========
+  const handleChangeSelect = (ev) => {
+    const { value } = ev.target;
+    setStatus((prevStatus) => ({ ...prevStatus, priority: value }));
+  };
+
+  // ========new task
+  const newTask = {
+    ...status,
+    id: Date.now(),
+  };
+  // ! Functional setState [info]
+  const handleSubmit = () => {
+    setGlobalList((prevList) => [...prevList, newTask]);
+    // clean input form
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      name: "",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    }));
+  };
   return (
     <>
       <Box
@@ -55,7 +74,9 @@ export default function FormInput() {
             variant="outlined"
             required
             value={status.name}
-            onChange={handleChangeName}
+            onChange={(ev) => {
+              handleChangeName(ev);
+            }}
           />
           <TextField
             label="Date"
@@ -64,7 +85,7 @@ export default function FormInput() {
             type="date"
             focused
             value={status.date}
-            onChange={handleChangeDate}
+            onChange={(ev) => handleChangeDate(ev)}
           />
           <Stack className="" sx={{}}>
             <FormControl
@@ -83,7 +104,7 @@ export default function FormInput() {
                 id="demo-simple-select"
                 value={status.priority}
                 label="priority"
-                onChange={handleChangeSelect}
+                onChange={(ev) => handleChangeSelect(ev)}
               >
                 <MenuItem value="h">
                   <Badge badgeContent={8} color="error" variant="dot">
@@ -110,6 +131,9 @@ export default function FormInput() {
             color="success"
             size="small"
             disabled={status.name !== "" ? false : true}
+            onClick={() => {
+              handleSubmit();
+            }}
           >
             <AddIcon />
             ADD

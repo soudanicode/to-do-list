@@ -54,30 +54,14 @@ const theme = createTheme({
     },
   },
 });
-// const listItems =[
-//   {
-//     key:"",
-//     name:"go to home",
-//     priority:"m",
-//     date:"22/4/2000"
-//   },
-//   {
-//     key:"",
-//     name:"go to school",
-//     priority:"l",
-//     date:"22/1/2000"
-//   },
 
-// ]
 export default function Layout() {
   // use states data
-  // Task List
   const [globalList, setGlobalList] = React.useState([]);
-  // ==
   const [checked, setChecked] = React.useState([]);
   const [status, setStatus] = React.useState({
     name: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     priority: "m",
   });
 
