@@ -57,7 +57,13 @@ const theme = createTheme({
 
 export default function Layout() {
   // use states data
-  const [globalList, setGlobalList] = React.useState([]);
+  const [globalList, setGlobalList] = React.useState([
+    {
+      name: "test",
+      date: new Date().toISOString().split("T")[0],
+      priority: "l",
+    },
+  ]);
   const [checked, setChecked] = React.useState([]);
   const [status, setStatus] = React.useState({
     name: "",

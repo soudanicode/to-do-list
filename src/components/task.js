@@ -17,6 +17,8 @@ import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Badge from "@mui/material/Badge";
+import Tooltip from "@mui/material/Tooltip";
+
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -48,7 +50,7 @@ export function CheckboxList() {
     const currentIndex = checked.indexOf(id);
     const updateList = [...currentList];
     if (currentIndex === -1) {
-      updateList.push(id);
+      updateList.unshift(id);
     } else {
       updateList.splice(currentIndex, 1);
     }
@@ -99,19 +101,22 @@ export function CheckboxList() {
                     }
                     sx={{ cursor: "pointer", borderColor: "#a3a3a3" }}
                   />
-
-                  <IconButton
-                    aria-label="deleteForeverIcon"
-                    color="primary.dark"
-                  >
-                    <EditNoteOutlinedIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label="deleteForeverIcon"
-                    color="primary.dark"
-                  >
-                    <DeleteForeverOutlinedIcon />
-                  </IconButton>
+                  <Tooltip title="Edit task">
+                    <IconButton
+                      aria-label="deleteForeverIcon"
+                      color="primary.dark"
+                    >
+                      <EditNoteOutlinedIcon />
+                    </IconButton>
+                  </Tooltip>
+                  <Tooltip title="Delete">
+                    <IconButton
+                      aria-label="deleteForeverIcon"
+                      color="primary.dark"
+                    >
+                      <DeleteForeverOutlinedIcon />
+                    </IconButton>
+                  </Tooltip>
                 </Stack>
               }
               disablePadding

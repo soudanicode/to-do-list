@@ -45,7 +45,7 @@ export default function FormInput() {
   };
   // ! Functional setState [info]
   const handleSubmit = () => {
-    setGlobalList((prevList) => [...prevList, newTask]);
+    setGlobalList((prevList) => [newTask, ...prevList]);
     // clean input form
     setStatus((prevStatus) => ({
       ...prevStatus,
@@ -126,18 +126,20 @@ export default function FormInput() {
           </Stack>
         </Stack>
         <Stack direction="row-reverse" spacing={2} sx={{ marginTop: "10px" }}>
-          <Button
-            variant="outlined"
-            color="success"
-            size="small"
-            disabled={status.name !== "" ? false : true}
-            onClick={() => {
-              handleSubmit();
-            }}
-          >
-            <AddIcon />
-            ADD
-          </Button>
+          <Link to="/">
+            <Button
+              variant="outlined"
+              color="success"
+              size="small"
+              disabled={status.name !== "" ? false : true}
+              onClick={() => {
+                handleSubmit();
+              }}
+            >
+              <AddIcon />
+              ADD
+            </Button>
+          </Link>
           <Link to="/">
             <Button variant="outlined" color="warning" size="small">
               <CancelIcon />
