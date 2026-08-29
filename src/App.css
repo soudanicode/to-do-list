@@ -126,10 +126,7 @@ body {
   font-size: small;
 }
 
-/* #icon-button{
-  --IconButton-hoverBg:transparent;
-  border: 1px solid midnightblue;
-  border-radius: 3px;
-  padding: 2px;
-  
-} */
+/* snackbar */
+.css-58e1aw-MuiPaper-root-MuiSnackbarContent-root {
+  background-color: #38006b !important  ;
+}

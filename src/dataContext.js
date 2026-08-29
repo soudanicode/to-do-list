@@ -1,4 +1,3 @@
 import { createContext } from "react";
- const DataContext = createContext(null);
- 
+const DataContext = createContext(null);
 export default DataContext;

@@ -12,7 +12,6 @@ import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useContext } from "react";
-
 export default function HomeInterface() {
   const [alignment, setAlignment] = useState("all");
   const hadleAlignment = (ev, newAlignment) => {

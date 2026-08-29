@@ -2,7 +2,7 @@ import "../App.css";
 import React from "react";
 import { useContext } from "react";
 import DataContext from "../dataContext";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 // copmonenets
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -18,10 +18,9 @@ import Select from "@mui/material/Select";
 import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
-import Snackbar from "@mui/material/Snackbar";
 
-export default function FormInput() {
-  const [status, setStatus, globalList, setGlobalList, , , , , open, setOpen] =
+export default function EditTask() {
+  const [status, setStatus, globalList, setGlobalList] =
     useContext(DataContext);
 
   // handleFunctions
@@ -38,23 +37,31 @@ export default function FormInput() {
     const { value } = ev.target;
     setStatus((prevStatus) => ({ ...prevStatus, priority: value }));
   };
-
-  // ========new task
-  const newTask = {
-    ...status,
-    id: Date.now(),
-  };
   // ! Functional setState [info]
+  const params = useParams();
   const handleSubmit = () => {
-    setGlobalList((prevList) => [newTask, ...prevList]);
+    const newList = [...globalList];
+    let counter = 0;
+    let currentIndex = 0;
+    for (let task of globalList) {
+      if (task.id === Number(params.title)) {
+        currentIndex = counter;
+      }
+      counter++;
+    }
+    // ========new task
+    const newTask = {
+      ...status,
+    };
+    newList[currentIndex] = newTask;
+    setGlobalList(newList);
     // clean input form
-    // setStatus((prevStatus) => ({
-    //   ...prevStatus,
-    //   name: "",
-    //   date: new Date().toISOString().split("T")[0],
-    //   priority: "m",
-    // }));
-    setOpen(true);
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      name: "",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    }));
   };
 
   return (

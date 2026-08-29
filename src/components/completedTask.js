@@ -30,7 +30,7 @@ import DataContext from "../dataContext";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function CompleteTask() {
-  const [, , globalList, setGlobalList, checked, setChecked] =
+  const [, , globalList, setGlobalList, checked, setChecked, handleDelete] =
     useContext(DataContext);
   return (
     <>
@@ -42,7 +42,8 @@ export default function CompleteTask() {
             if (isChecked == true) {
               return (
                 <ListItem
-                  key={key}
+                  key={task.id}
+                  disablePadding
                   secondaryAction={
                     <Stack
                       edge="end"
@@ -82,13 +83,13 @@ export default function CompleteTask() {
                         <IconButton
                           aria-label="deleteForeverIcon"
                           color="primary.dark"
+                          onClick={() => handleDelete(task.id)}
                         >
                           <DeleteForeverOutlinedIcon />
                         </IconButton>
                       </Tooltip>
                     </Stack>
                   }
-                  disablePadding
                 >
                   <ListItemButton
                     className="rd-10 p-10"

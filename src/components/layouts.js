@@ -14,6 +14,7 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { Route, Routes, BrowserRouter, Link, Outlet } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { red } from "@mui/material/colors";
+import Snackbar from "@mui/material/Snackbar";
 
 const theme = createTheme({
   palette: {
@@ -56,20 +57,46 @@ const theme = createTheme({
 });
 
 export default function Layout() {
+  const [open, setOpen] = React.useState(false);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   // use states data
-  const [globalList, setGlobalList] = React.useState([
-    {
-      name: "test",
-      date: new Date().toISOString().split("T")[0],
-      priority: "l",
-    },
-  ]);
+  const [globalList, setGlobalList] = React.useState([]);
   const [checked, setChecked] = React.useState([]);
   const [status, setStatus] = React.useState({
     name: "",
     date: new Date().toISOString().split("T")[0],
     priority: "m",
   });
+  // HANDLER EVENTS
+  // create HANDLE DELETE FUNCTION
+  const handleDelete = (id) => {
+    const newList = [...globalList];
+    let counter = 0;
+    let currentIndex = 0;
+    for (let task of newList) {
+      if (task.id === id) {
+        currentIndex = counter;
+      }
+      counter++;
+    }
+    newList.splice(currentIndex, 1);
+    setGlobalList(newList);
+  };
+  // create HANDLE EDIT FUNCTION
+  const handleEdit = (task) => {
+    setStatus((preventStatus) => ({
+      ...preventStatus,
+      name: task.name,
+      date: task.date,
+      id: task.id,
+      priority: task.priority,
+    }));
+  };
 
   return (
     <>
@@ -82,8 +109,19 @@ export default function Layout() {
             setGlobalList,
             checked,
             setChecked,
+            handleDelete,
+            handleEdit,
+            open,
+            setOpen,
+            handleClose,
           ]}
         >
+          <Snackbar
+            open={open}
+            // autoHideDuration={4000}
+            onClose={handleClose}
+            message="A new task has been added"
+          />
           <Container id="container" maxWidth="sm">
             <Box className="contentBox glass-card">
               <Stack spacing={5}>
@@ -101,7 +139,7 @@ export default function Layout() {
                     component="h3"
                     sx={{ fontSize: "", textAlign: "center" }}
                   >
-                    My-TO DO
+                    DO IT
                   </Typography>
                 </Stack>
                 <Outlet />

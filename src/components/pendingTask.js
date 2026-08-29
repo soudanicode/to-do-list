@@ -18,8 +18,7 @@ import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
-
-// _____ Icon
+import { Link } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
@@ -31,8 +30,16 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import DataContext from "../dataContext";
 
 export default function PendingTask() {
-  const [, , globalList, setGlobalList, checked, setChecked] =
-    useContext(DataContext);
+  const [
+    ,
+    ,
+    globalList,
+    setGlobalList,
+    checked,
+    setChecked,
+    handleDelete,
+    handleEdit,
+  ] = useContext(DataContext);
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
     const currentIndex = checked.indexOf(id);
@@ -54,7 +61,8 @@ export default function PendingTask() {
             if (isChecked !== true) {
               return (
                 <ListItem
-                  key={key}
+                  key={task.id}
+                  disablePadding
                   secondaryAction={
                     <Stack
                       edge="end"
@@ -91,24 +99,27 @@ export default function PendingTask() {
                       />
 
                       <Tooltip title="Edit task">
-                        <IconButton
-                          aria-label="deleteForeverIcon"
-                          color="primary.dark"
-                        >
-                          <EditNoteOutlinedIcon />
-                        </IconButton>
+                        <Link to={`/addtask/${task.id}`}>
+                          <IconButton
+                            aria-label="deleteForeverIcon"
+                            color="primary.dark"
+                            onClick={() => handleEdit(task)}
+                          >
+                            <EditNoteOutlinedIcon />
+                          </IconButton>
+                        </Link>
                       </Tooltip>
                       <Tooltip title="Delete">
                         <IconButton
                           aria-label="deleteForeverIcon"
                           color="primary.dark"
+                          onClick={() => handleDelete(task.id)}
                         >
                           <DeleteForeverOutlinedIcon />
                         </IconButton>
                       </Tooltip>
                     </Stack>
                   }
-                  disablePadding
                 >
                   <ListItemButton
                     className="rd-10 p-10"

@@ -29,6 +29,7 @@ import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import DataContext from "../dataContext";
+import { Link } from "react-router-dom";
 // ===========
 
 export default function Tasks() {
@@ -42,8 +43,16 @@ export default function Tasks() {
 }
 
 export function CheckboxList() {
-  const [status, setStatus, globalList, setGlobalList, checked, setChecked] =
-    useContext(DataContext);
+  const [
+    status,
+    setStatus,
+    globalList,
+    setGlobalList,
+    checked,
+    setChecked,
+    handleDelete,
+    handleEdit,
+  ] = useContext(DataContext);
 
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
@@ -63,10 +72,9 @@ export function CheckboxList() {
         globalList.map((task) => {
           let key = task.id;
           const isChecked = Array.isArray(checked) && checked.includes(key);
-
           return (
             <ListItem
-              key={key}
+              key={task.id}
               secondaryAction={
                 <Stack
                   edge="end"
@@ -101,18 +109,25 @@ export function CheckboxList() {
                     }
                     sx={{ cursor: "pointer", borderColor: "#a3a3a3" }}
                   />
-                  <Tooltip title="Edit task">
-                    <IconButton
-                      aria-label="deleteForeverIcon"
-                      color="primary.dark"
-                    >
-                      <EditNoteOutlinedIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {isChecked === false ? (
+                    <Tooltip title="Edit task">
+                      <Link to={`/addtask/${task.id}`}>
+                        <IconButton
+                          aria-label="deleteForeverIcon"
+                          color="primary.dark"
+                          onClick={() => handleEdit(task)}
+                        >
+                          <EditNoteOutlinedIcon />
+                        </IconButton>
+                      </Link>
+                    </Tooltip>
+                  ) : null}
+
                   <Tooltip title="Delete">
                     <IconButton
                       aria-label="deleteForeverIcon"
                       color="primary.dark"
+                      onClick={() => handleDelete(task.id)}
                     >
                       <DeleteForeverOutlinedIcon />
                     </IconButton>
