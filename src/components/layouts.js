@@ -1,5 +1,5 @@
 import "../App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HomeInterface } from "./homeComponent";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DataContext from "../dataContext";
@@ -15,7 +15,6 @@ import { Route, Routes, BrowserRouter, Link, Outlet } from "react-router-dom";
 import Container from "@mui/material/Container";
 import { red } from "@mui/material/colors";
 import Snackbar from "@mui/material/Snackbar";
-
 const theme = createTheme({
   palette: {
     primary: {
@@ -57,21 +56,32 @@ const theme = createTheme({
 });
 
 export default function Layout() {
-  const [open, setOpen] = React.useState(false);
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
   // use states data
-  const [globalList, setGlobalList] = React.useState([]);
-  const [checked, setChecked] = React.useState([]);
+  const [open, setOpen] = React.useState(false);
+  const [globalList, setGlobalList] = React.useState(() => {
+    const savedTask = localStorage.getItem("my_tasks");
+    return savedTask ? JSON.parse(savedTask) : [];
+  });
+  const [checked, setChecked] = React.useState(() => {
+    const savedChecked = localStorage.getItem("checked_list");
+    return savedChecked ? JSON.parse(savedChecked) : [];
+  });
   const [status, setStatus] = React.useState({
     name: "",
     date: new Date().toISOString().split("T")[0],
     priority: "m",
   });
+
+  // === GET DATA IN  LOCALE STORAGE
+  // for globale list
+  useEffect(() => {
+    localStorage.setItem("my_tasks", JSON.stringify(globalList));
+  }, [globalList]);
+  // for Cheked
+  useEffect(() => {
+    localStorage.setItem("checked_list", JSON.stringify(checked));
+  }, [checked]);
+
   // HANDLER EVENTS
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
@@ -97,6 +107,13 @@ export default function Layout() {
       priority: task.priority,
     }));
   };
+  // for Snackbar
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
 
   return (
     <>
@@ -118,7 +135,7 @@ export default function Layout() {
         >
           <Snackbar
             open={open}
-            // autoHideDuration={4000}
+            autoHideDuration={4000}
             onClose={handleClose}
             message="A new task has been added"
           />
@@ -137,15 +154,27 @@ export default function Layout() {
                   <Typography
                     variant="h3"
                     component="h3"
-                    sx={{ fontSize: "", textAlign: "center" }}
+                    sx={{ fontSize: "", textAlign: "center", color: "#dcdbdd" }}
                   >
-                    DO IT
+                    DO<span className="symbol">✔</span>T
                   </Typography>
                 </Stack>
                 <Outlet />
               </Stack>
             </Box>
           </Container>
+          <Typography
+            variant="caption"
+            sx={{
+              display: "block",
+              textAlign: "center",
+              mt: 1,
+              color: "rgba(255, 255, 255, 0.6)",
+              fontSize: "0.8rem",
+            }}
+          >
+            Designed & Developed with ❤️ by   «sdnMostaf»
+          </Typography>
         </DataContext.Provider>
       </ThemeProvider>
     </>

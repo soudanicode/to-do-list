@@ -18,8 +18,6 @@ import Select from "@mui/material/Select";
 import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
-import Snackbar from "@mui/material/Snackbar";
-
 export default function FormInput() {
   const [status, setStatus, globalList, setGlobalList, , , , , open, setOpen] =
     useContext(DataContext);
@@ -48,12 +46,12 @@ export default function FormInput() {
   const handleSubmit = () => {
     setGlobalList((prevList) => [newTask, ...prevList]);
     // clean input form
-    // setStatus((prevStatus) => ({
-    //   ...prevStatus,
-    //   name: "",
-    //   date: new Date().toISOString().split("T")[0],
-    //   priority: "m",
-    // }));
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      name: "",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    }));
     setOpen(true);
   };
 

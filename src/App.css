@@ -21,7 +21,15 @@ body {
   align-items: center;
   justify-content: center;
 }
+/* === SCROOL BAR */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
 /* my components */
+.w-list {
+  max-height: 404px;
+  overflow-y: auto;
+}
 .w-castum {
   width: 80%;
 }
@@ -86,10 +94,12 @@ body {
   padding: 20px;
   border-radius: 10px;
 }
+.symbol {
+}
 /* ListItem */
-
-.css-18g885t-MuiButtonBase-root-MuiListItemButton-root {
-  border-radius: 10px !important;
+.css-ansxpy-MuiButtonBase-root-MuiListItemButton-root {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 .css-ansxpy-MuiButtonBase-root-MuiListItemButton-root:hover {
   background-color: #edeef1ce !important;

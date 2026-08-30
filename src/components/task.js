@@ -67,7 +67,13 @@ export function CheckboxList() {
   };
 
   return (
-    <List className="p-8" sx={{ borderRadius: "10px", marginTop: "10px" }}>
+    <List
+      className="w-list hide-scrollbar p-8 "
+      sx={{
+        borderRadius: "10px",
+        marginTop: "10px",
+      }}
+    >
       {Array.isArray(globalList) &&
         globalList.map((task) => {
           let key = task.id;
