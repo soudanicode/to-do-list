@@ -1,5 +1,17 @@
-# View the application here » [todo-taskmanager](https://doit-taskmanager.netlify.app/)
-≠≠≠≠≠≠≠
+# DO IT — Task Management App 🚀
+A modern, glassmorphic task management application built with React for a sleek, responsive user experience.
+
+## 🔗 Live Demo: doit-taskmanager.netlify.app
+
+## 🛠️ Tech Stack
+Core: React.js, JavaScript (ES6+), HTML5/CSS3.
+## ✨ Key Features
+Persistent Storage: Auto-saves tasks, completion status, and filter states to localStorage.
+
+Full Task Management: Add, edit, delete, and filter tasks seamlessly (ALL / PENDING / COMPLETED).
+
+_____________________________________________________________________
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
