@@ -1,5 +1,3 @@
-# Your site is live at https://soudanicode.github.io/to-do-list/
-»»»»
 
 # Getting Started with Create React App
 
