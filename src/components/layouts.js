@@ -173,7 +173,7 @@ export default function Layout() {
               fontSize: "0.8rem",
             }}
           >
-            Designed & Developed with ❤️ by   «sdnMostaf»
+            Designed & Developed with ❤️ by «sdnMostaf»
           </Typography>
         </DataContext.Provider>
       </ThemeProvider>
