@@ -1,6 +1,6 @@
 import "../App.css";
 import React from "react";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 // ___ MUI Components
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
@@ -42,7 +42,7 @@ export default function CompleteTask() {
           globalList.map((task) => {
             let key = task.id;
             const isChecked = Array.isArray(checked) && checked.includes(key);
-            if (isChecked == true) {
+            if (isChecked === true) {
               return (
                 <ListItem
                   key={task.id}

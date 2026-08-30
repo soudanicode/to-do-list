@@ -11,9 +11,17 @@ import { Link, Outlet } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import AddTaskIcon from "@mui/icons-material/AddTask";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 export default function HomeInterface() {
-  const [alignment, setAlignment] = useState("all");
+  const [alignment, setAlignment] = useState(() => {
+    const savedAlignment = localStorage.getItem("aligment-butt");
+    return savedAlignment ? JSON.parse(savedAlignment) : "all";
+  });
+  // save in locale storage
+  useEffect(() => {
+    localStorage.setItem("aligment-butt", JSON.stringify(alignment));
+  });
+
   const hadleAlignment = (ev, newAlignment) => {
     if (newAlignment !== null) {
       setAlignment(newAlignment);

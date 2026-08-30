@@ -147,7 +147,7 @@ export default function EditTask() {
               }}
             >
               <AddIcon />
-              ADD
+              EDIT
             </Button>
           </Link>
           <Link to="/">
