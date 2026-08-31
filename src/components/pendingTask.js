@@ -71,7 +71,7 @@ export default function PendingTask() {
                       edge="end"
                       aria-label="Icons"
                       direction="row"
-                      sx={{ gap: "8px" }}
+                      sx={{ gap: "8px", alignItems: "center" }}
                     >
                       <Chip
                         label="Priority"
