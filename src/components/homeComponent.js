@@ -32,23 +32,51 @@ export default function HomeInterface() {
       <Box>
         <Stack>
           <Stack
+            id="nav-button"
             direction="row"
             spacing={1}
             sx={{ justifyContent: "space-between", alignItems: "center" }}
           >
             <Link to="/addtask">
-              <Fab variant="extended" size="small" color="primary">
-                <AddTaskIcon sx={{ mr: 1 }} />
+              <Fab
+                variant="extended"
+                size="small"
+                color="primary"
+                sx={{
+                  fontSize: "17px",
+                  fontWeight: "700",
+                  height: "35px",
+                  color: "#ffff ",
+                }}
+              >
+                <AddTaskIcon sx={{ mr: 1, fontSize: "1.6rem" }} />
                 Add
               </Fab>
             </Link>
             <ToggleButtonGroup
+              id="nav-class"
               value={alignment}
               exclusive
               onChange={hadleAlignment}
               aria-label="Basic button group"
               size="small"
-              style={{ gap: "10px" }}
+              sx={{
+                gap: { xs: "10px", sm: "7px" },
+
+                width: "100%",
+                justifyContent: "end",
+                ".css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root": {
+                  lineHeight: { xs: "1.2", sm: "1.7" },
+                  fontWeight: "600",
+                  fontSize: { xs: "0.7rem", sm: "0.75rem" },
+                  height: "35px",
+                  borderRadius: "100vh",
+                  textTransform: "math-auto",
+                  padding: "0px 14px",
+                  letterSpacing: "0.028em",
+                  color: "#ffff",
+                },
+              }}
             >
               <Link to="/">
                 <ToggleButton value="all">All</ToggleButton>

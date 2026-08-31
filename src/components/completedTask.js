@@ -54,34 +54,6 @@ export default function CompleteTask() {
                       direction="row"
                       sx={{ gap: "8px" }}
                     >
-                      <Chip
-                        label="Priority"
-                        color="primary.dark"
-                        size="small"
-                        variant="outlined"
-                        disabled={isChecked ? true : false}
-                        avatar={
-                          <Avatar
-                            style={{
-                              fontVariant: "small-caps",
-                              fontSize: "0.68rem",
-                              fontWeight: "600",
-                              fontFamily: "math",
-                              color: "var(--avatar-color)",
-                              backgroundColor:
-                                task.priority === "m"
-                                  ? "var(--priority-color-m)"
-                                  : task.priority === "l"
-                                    ? "var(--priority-color-l)"
-                                    : "var(--priority-color-h)",
-                            }}
-                          >
-                            {task.priority}
-                          </Avatar>
-                        }
-                        sx={{ cursor: "pointer", borderColor: "#a3a3a3" }}
-                      />
-
                       <Tooltip title="Delete">
                         <IconButton
                           aria-label="deleteForeverIcon"
@@ -122,6 +94,7 @@ export default function CompleteTask() {
                               dir="auto"
                               primary={
                                 <Typography
+                                  id="title"
                                   component="h4"
                                   color="textPrimary"
                                   sx={{

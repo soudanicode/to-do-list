@@ -171,10 +171,10 @@ export function CheckboxList() {
                           dir="auto"
                           primary={
                             <Typography
+                              id="title"
                               component="h4"
                               color="textPrimary"
                               sx={{
-                                fontSize: "1.1rem",
                                 textDecoration: isChecked
                                   ? "line-through"
                                   : "none",

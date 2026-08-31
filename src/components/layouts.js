@@ -139,8 +139,15 @@ export default function Layout() {
             onClose={handleClose}
             message="A new task has been added"
           />
-          <Container id="container" maxWidth="sm">
-            <Box className="contentBox glass-card">
+          <Container id="container" maxWidth="" sx={{ padding: { xs: "3px" } }}>
+            <Box
+              className="contentBox glass-card"
+              sx={{
+                // width: { xs: "97%", sm: "50%" },
+                height: { xs: "90vh" },
+                padding: { xs: "8px 8px", sm: "10px", md: "20px" },
+              }}
+            >
               <Stack spacing={5}>
                 <Stack
                   spacing={3}
@@ -162,19 +169,19 @@ export default function Layout() {
                 <Outlet />
               </Stack>
             </Box>
+            <Typography
+              variant="caption"
+              sx={{
+                display: "block",
+                textAlign: "center",
+                mt: 1,
+                color: "rgba(255, 255, 255, 0.6)",
+                fontSize: "0.8rem",
+              }}
+            >
+              Designed & Developed with ❤️ by «sdnMostaf»
+            </Typography>
           </Container>
-          <Typography
-            variant="caption"
-            sx={{
-              display: "block",
-              textAlign: "center",
-              mt: 1,
-              color: "rgba(255, 255, 255, 0.6)",
-              fontSize: "0.8rem",
-            }}
-          >
-            Designed & Developed with ❤️ by «sdnMostaf»
-          </Typography>
         </DataContext.Provider>
       </ThemeProvider>
     </>

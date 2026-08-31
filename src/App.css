@@ -13,6 +13,7 @@
 }
 body {
   width: 100vw;
+  height: 100vh;
   color: #fff;
   font-size: 20px !important;
   background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -36,14 +37,52 @@ body {
 .rd-10 {
   border-radius: 10px !important;
 }
-.p-8 {
-  padding: 5px !important;
-}
+
 /*------ my components */
+#root {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#container {
+  /* padding-left: 16px;
+  padding-right: 16px; */
+  margin-left: auto;
+  margin-right: auto;
+}
+/* CONTROLE MEDIA */
+@media (max-width: 400px) {
+  #nav-button {
+    flex-direction: column;
+    gap: 15px;
+  }
+  #nav-class {
+    justify-content: center !important;
+  }
+  .css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
+    justify-content: center !important;
+  }
+  #title {
+    font-size: 0.8rem;
+  }
+  .MuiTypography-caption {
+    font-size: 0.7rem !important;
+  }
+}
+@media (max-width: 599px) {
+  #title {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 600px) {
+  #title {
+    font-size: 1rem;
+  }
+}
 
 .glass-card {
-  width: 240px;
-  height: 360px;
   background-color: rgb(223 221 221 / 15%);
 
   backdrop-filter: blur(10px);
@@ -89,13 +128,37 @@ body {
   );
 }
 .contentBox {
-  width: 600px;
+  width: 90%;
+  max-width: 450;
   height: auto;
-  padding: 20px;
+  padding: 5px;
   border-radius: 10px;
+  margin: 0 auto;
 }
-.symbol {
+@media (min-width: 0px) {
+  .contentBox {
+    width: 97%;
+  }
 }
+@media (min-width: 428px) {
+  .contentBox {
+    width: 93%;
+  }
+}
+@media (min-width: 600px) {
+  .contentBox {
+    width: 75%;
+  }
+}
+@media (min-width: 769px) {
+  .contentBox {
+    width: 600px;
+  }
+  .css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
+    font-size: 0.85rem !important;
+  }
+}
+
 /* ListItem */
 .css-ansxpy-MuiButtonBase-root-MuiListItemButton-root {
   padding-top: 0px !important;
@@ -109,7 +172,7 @@ body {
 }
 /* ToogleButton */
 .css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
-  border-radius: 5px !important;
+  border-radius: 50vh !important;
 }
 /* custom iconButton */
 .css-53g0n7-MuiButtonBase-root-MuiIconButton-root {
