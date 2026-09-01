@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, BrowserRouter, Link } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 // _____ FILES IMPORTS
 import Layout from "./components/layouts";
 // _____ copmonents

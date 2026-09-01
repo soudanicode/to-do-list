@@ -2,7 +2,6 @@ import "../App.css";
 import React from "react";
 import { useContext } from "react";
 // ___ MUI Components
-import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -16,18 +15,14 @@ import Chip from "@mui/material/Chip";
 import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
 
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import DataContext from "../dataContext";
 import { Link } from "react-router-dom";
 // ===========
@@ -43,16 +38,8 @@ export default function Tasks() {
 }
 
 export function CheckboxList() {
-  const [
-    status,
-    setStatus,
-    globalList,
-    setGlobalList,
-    checked,
-    setChecked,
-    handleDelete,
-    handleEdit,
-  ] = useContext(DataContext);
+  const [, , globalList, , checked, setChecked, handleDelete, handleEdit] =
+    useContext(DataContext);
 
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
