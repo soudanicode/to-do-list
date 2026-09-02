@@ -29,10 +29,14 @@ export default function CompleteTask() {
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
         {Array.isArray(globalList) &&
-          globalList.map((task) => {
-            let key = task.id;
-            const isChecked = Array.isArray(checked) && checked.includes(key);
-            if (isChecked === true) {
+          globalList
+            .filter(
+              (task) => Array.isArray(checked) && checked.includes(task.id),
+            )
+            .map((task) => {
+              const isChecked =
+                Array.isArray(checked) && checked.includes(task.id);
+
               return (
                 <ListItem
                   key={task.id}
@@ -116,8 +120,7 @@ export default function CompleteTask() {
                   </ListItemButton>
                 </ListItem>
               );
-            }
-          })}
+            })}
       </List>
     </>
   );
