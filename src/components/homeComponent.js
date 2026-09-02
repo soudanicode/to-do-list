@@ -3,13 +3,13 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import DataContext from "../dataContext";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useContext, useEffect } from "react";
 export default function HomeInterface() {
-  const [status, setStatus, , , , , , , , , , ,] = useContext(DataContext);
+  const [, setStatus, , , , , , , , , , ,] = useContext(DataContext);
   const [alignment, setAlignment] = useState(() => {
     const savedAlignment = localStorage.getItem("aligment-butt");
     return savedAlignment ? JSON.parse(savedAlignment) : "all";
