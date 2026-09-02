@@ -2,8 +2,6 @@ import "../App.css";
 import React from "react";
 import { useContext } from "react";
 // ___ MUI Components
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,34 +10,21 @@ import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import Badge from "@mui/material/Badge";
 import Tooltip from "@mui/material/Tooltip";
 import { Link } from "react-router-dom";
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
+import FlagIcon from "@mui/icons-material/Flag";
 import DataContext from "../dataContext";
 
 export default function PendingTask() {
-  const [
-    ,
-    ,
-    globalList,
-    setGlobalList,
-    checked,
-    setChecked,
-    handleDelete,
-    handleEdit,
-  ] = useContext(DataContext);
+  const [, , globalList, , checked, setChecked, handleDelete, handleEdit] =
+    useContext(DataContext);
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
     const currentIndex = checked.indexOf(id);
@@ -73,35 +58,23 @@ export default function PendingTask() {
                       direction="row"
                       sx={{ gap: "8px", alignItems: "center" }}
                     >
-                      <Chip
-                        label="Priority"
-                        color="primary.dark"
-                        size="small"
-                        variant="outlined"
-                        disabled={isChecked ? true : false}
-                        avatar={
-                          <Avatar
-                            style={{
-                              fontVariant: "small-caps",
-                              fontSize: "0.68rem",
-                              fontWeight: "600",
-                              fontFamily: "math",
-                              color: "var(--avatar-color)",
-                              backgroundColor:
-                                task.priority === "m"
-                                  ? "var(--priority-color-m)"
-                                  : task.priority === "l"
-                                    ? "var(--priority-color-l)"
-                                    : "var(--priority-color-h)",
-                            }}
-                          >
-                            {task.priority}
-                          </Avatar>
-                        }
-                        sx={{ cursor: "pointer", borderColor: "#a3a3a3" }}
-                      />
-
-                      <Tooltip title="Edit task">
+                      {/* ADD tag icon */}
+                      <Tooltip
+                        title={`${task.priority === "m" ? "Midium" : task.priority === "h" ? "High" : "Low"} Priority`}
+                      >
+                        <FlagIcon
+                          sx={{
+                            color:
+                              task.priority === "m"
+                                ? "var(--priority-color-midium)"
+                                : task.priority === "h"
+                                  ? "var(--priority-color-high)"
+                                  : "var(--priority-color-low)",
+                          }}
+                        />
+                      </Tooltip>
+                      {/* ADD tag icon */}
+                      <Tooltip title="Edit">
                         <Link to={`/addtask/${task.id}`}>
                           <IconButton
                             aria-label="deleteForeverIcon"

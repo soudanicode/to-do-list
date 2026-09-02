@@ -11,10 +11,9 @@ import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import FlagIcon from "@mui/icons-material/Flag";
 import Tooltip from "@mui/material/Tooltip";
 
 // _____ Icon
@@ -75,35 +74,24 @@ export function CheckboxList() {
                   direction="row"
                   sx={{ gap: "8px", alignItems: "center" }}
                 >
-                  <Chip
-                    label="Priority"
-                    color="primary.dark"
-                    size="small"
-                    variant="outlined"
-                    disabled={isChecked ? true : false}
-                    avatar={
-                      <Avatar
-                        style={{
-                          fontVariant: "small-caps",
-                          fontSize: "0.68rem",
-                          fontWeight: "600",
-                          fontFamily: "math",
-                          color: "var(--avatar-color)",
-                          backgroundColor:
-                            task.priority === "m"
-                              ? "var(--priority-color-m)"
-                              : task.priority === "l"
-                                ? "var(--priority-color-l)"
-                                : "var(--priority-color-h)",
-                        }}
-                      >
-                        {task.priority}
-                      </Avatar>
-                    }
-                    sx={{ cursor: "pointer", borderColor: "#a3a3a3" }}
-                  />
+                  {/*==== ADD flag icon */}
+                  <Tooltip
+                    title={`${task.priority === "m" ? "Midium" : task.priority === "h" ? "High" : "Low"} Priority`}
+                  >
+                    <FlagIcon
+                      sx={{
+                        color:
+                          task.priority === "m"
+                            ? "var(--priority-color-midium)"
+                            : task.priority === "h"
+                              ? "var(--priority-color-high)"
+                              : "var(--priority-color-low)",
+                      }}
+                    />
+                  </Tooltip>
+                  {/* ==== ADD flag icon */}
                   {isChecked === false ? (
-                    <Tooltip title="Edit task">
+                    <Tooltip title="Edit">
                       <Link to={`/addtask/${task.id}`}>
                         <IconButton
                           aria-label="deleteForeverIcon"

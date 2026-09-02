@@ -1,18 +1,15 @@
 import "../App.css";
-import Tasks from "./task";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import DataContext from "../dataContext";
-import { ButtonGroup, Button } from "@mui/material";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, Outlet } from "react-router-dom";
 import Fab from "@mui/material/Fab";
-import NavigationIcon from "@mui/icons-material/Navigation";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useContext, useEffect } from "react";
 export default function HomeInterface() {
+  const [status, setStatus, , , , , , , , , , ,] = useContext(DataContext);
   const [alignment, setAlignment] = useState(() => {
     const savedAlignment = localStorage.getItem("aligment-butt");
     return savedAlignment ? JSON.parse(savedAlignment) : "all";
@@ -27,6 +24,16 @@ export default function HomeInterface() {
       setAlignment(newAlignment);
     }
   };
+  const handleCancel = useEffect(() => {
+    // clean input form
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      name: "",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    }));
+  }, [setStatus]);
+
   return (
     <>
       <Box>
@@ -37,22 +44,24 @@ export default function HomeInterface() {
             spacing={1}
             sx={{ justifyContent: "space-between", alignItems: "center" }}
           >
-            <Link to="/addtask">
-              <Fab
-                variant="extended"
-                size="small"
-                color="primary"
-                sx={{
-                  fontSize: "17px",
-                  fontWeight: "700",
-                  height: "35px",
-                  color: "#ffff ",
-                }}
-              >
-                <AddTaskIcon sx={{ mr: 1, fontSize: "1.6rem" }} />
-                Add
-              </Fab>
-            </Link>
+            <div onClick={handleCancel}>
+              <Link to="/addtask">
+                <Fab
+                  variant="extended"
+                  size="small"
+                  color="primary"
+                  sx={{
+                    fontSize: "17px",
+                    fontWeight: "700",
+                    height: "35px",
+                    color: "#ffff ",
+                  }}
+                >
+                  <AddTaskIcon sx={{ mr: 1, fontSize: "1.6rem" }} />
+                  Add
+                </Fab>
+              </Link>
+            </div>
             <ToggleButtonGroup
               id="nav-class"
               value={alignment}

@@ -1,9 +1,10 @@
 :root {
   --checked-color: rgb(0 0 0 / 23%);
   --inChecked-color: #edeef1ce;
-  --priority-color-m: #ed6c02;
-  --priority-color-h: #d32f2f;
-  --priority-color-l: #2e7d32;
+  /* priority colors */
+  --priority-color-midium: #f59e0b;
+  --priority-color-high: #ef4444;
+  --priority-color-low: #3b82f6;
   --avatar-color: #ddd;
 }
 * {

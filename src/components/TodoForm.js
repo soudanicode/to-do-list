@@ -5,12 +5,9 @@ import DataContext from "../dataContext";
 import { Link } from "react-router-dom";
 // copmonenets
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { Button, ButtonGroup } from "@mui/material";
-import { ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -19,7 +16,7 @@ import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
 export default function FormInput() {
-  const [status, setStatus, globalList, setGlobalList, , , , , open, setOpen] =
+  const [status, setStatus, , setGlobalList, , , , , , setOpen, ,] =
     useContext(DataContext);
 
   // handleFunctions
