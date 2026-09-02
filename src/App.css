@@ -1,5 +1,5 @@
 :root {
-  --checked-color: rgb(0 0 0 / 23%);
+  --checked-color: #c5cae9;
   --inChecked-color: #edeef1ce;
   /* priority colors */
   --priority-color-midium: #f59e0b;
@@ -132,7 +132,7 @@ body {
   width: 90%;
   max-width: 450;
   height: auto;
-  padding: 5px;
+  padding: 8px;
   border-radius: 10px;
   margin: 0 auto;
 }
@@ -166,21 +166,14 @@ body {
   padding-bottom: 0px !important;
 }
 /* target list items is not checked */
-.css-ansxpy-MuiButtonBase-root-MuiListItemButton-root:hover {
+/* .css-ansxpy-MuiButtonBase-root-MuiListItemButton-root:hover {
   background-color: #c5cae9 !important;
-}
-/* target list items is checked */
-.css-1kt5hgi-MuiButtonBase-root-MuiListItemButton-root:hover {
-  background-color: #c5cae9 !important;
-}
-.css-1kt5hgi-MuiButtonBase-root-MuiListItemButton-root {
-  background-color: #c5cae9 !important;
-}
+} */
 
 /* ToogleButton */
-.css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
+/* .css-1i4vqyu-MuiButtonBase-root-MuiToggleButton-root {
   border-radius: 50vh !important;
-}
+} */
 /* custom iconButton */
 .css-53g0n7-MuiButtonBase-root-MuiIconButton-root {
   padding: 0px !important;
@@ -201,7 +194,7 @@ body {
 }
 
 .MuiInputBase-root:has(
-  > .css-1skkqr-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiInput-input
+  .css-1skkqr-MuiNativeSelect-root-MuiSelect-select-MuiInputBase-input-MuiInput-input
 ) {
   font-size: small;
 }

@@ -118,16 +118,20 @@ export function CheckboxList() {
               disablePadding
             >
               <ListItemButton
-                className="rd-10 p-10"
+                className=""
                 role={undefined}
                 onClick={() => handleToggle(key)}
                 dense
                 sx={{
                   mb: "5px",
-                  bgcolor: isChecked
-                    ? "var(--checked-color)"
-                    : "var(--inChecked-color)",
-                  opacity: isChecked ? "0.7" : "non",
+                  borderRadius: "10px",
+                  padding: "0px",
+                  paddingLeft: "15px ",
+                  bgcolor: isChecked ? "#c5cae9" : "var(--inChecked-color)",
+                  opacity: isChecked ? "#edeef1ce" : "non",
+                  "&:hover": {
+                    backgroundColor: "#f1f1edea  ",
+                  },
                 }}
               >
                 <ListItemIcon>

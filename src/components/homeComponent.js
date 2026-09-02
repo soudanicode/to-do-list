@@ -79,11 +79,12 @@ export default function HomeInterface() {
                   fontWeight: "600",
                   fontSize: { xs: "0.7rem", sm: "0.75rem" },
                   height: "35px",
-                  borderRadius: "100vh",
+                  borderRadius: "10px",
                   textTransform: "math-auto",
                   padding: "0px 14px",
                   letterSpacing: "0.028em",
-                  color: "#ffff",
+                  color: "#f4f4f4",
+                  // borderRadius: "50vh",
                 },
               }}
             >
