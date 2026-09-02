@@ -1,19 +1,14 @@
 import "../App.css";
-import React, { useState, useEffect } from "react";
-import { HomeInterface } from "./homeComponent";
+import React, { useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import DataContext from "../dataContext";
 // Motion Fremwork
-import { motion } from "motion/react";
 // componenets
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
-import { ButtonGroup, Button } from "@mui/material";
-import { ToggleButtonGroup, ToggleButton } from "@mui/material";
-import { Route, Routes, BrowserRouter, Link, Outlet } from "react-router-dom";
 import Container from "@mui/material/Container";
-import { red } from "@mui/material/colors";
 import Snackbar from "@mui/material/Snackbar";
 const theme = createTheme({
   palette: {

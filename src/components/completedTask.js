@@ -1,9 +1,7 @@
 import "../App.css";
 import React from "react";
-import { useContext, useMemo } from "react";
+import { useContext } from "react";
 // ___ MUI Components
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -12,26 +10,18 @@ import IconButton from "@mui/material/IconButton";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import Chip from "@mui/material/Chip";
-import Avatar from "@mui/material/Avatar";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import Badge from "@mui/material/Badge";
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import DataContext from "../dataContext";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function CompleteTask() {
-  const [, , globalList, setGlobalList, checked, setChecked, handleDelete] =
-    useContext(DataContext);
+  const [, , globalList, , checked, , handleDelete] = useContext(DataContext);
   return (
     <>
       <List
