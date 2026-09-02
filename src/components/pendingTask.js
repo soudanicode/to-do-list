@@ -43,10 +43,14 @@ export default function PendingTask() {
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
         {Array.isArray(globalList) &&
-          globalList.map((task) => {
-            let key = task.id;
-            const isChecked = Array.isArray(checked) && checked.includes(key);
-            if (isChecked !== true) {
+          globalList
+            .filter(
+              (task) => Array.isArray(checked) && !checked.includes(task.id),
+            )
+            .map((task) => {
+              let key = task.id;
+              const isChecked = Array.isArray(checked) && checked.includes(key);
+
               return (
                 <ListItem
                   key={task.id}
@@ -158,8 +162,7 @@ export default function PendingTask() {
                   </ListItemButton>
                 </ListItem>
               );
-            }
-          })}
+            })}
       </List>
     </>
   );
