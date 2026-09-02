@@ -210,7 +210,7 @@ body {
 .css-58e1aw-MuiPaper-root-MuiSnackbarContent-root {
   background-color: #38006b !important  ;
 }
-/* توسيط نافذة التقويم المدمجة في المتصفح */
+/* custom Calandar Picker */
 ::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
@@ -219,7 +219,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
 }
 
-/* ضبط موضع الـ Popover الخاص بالمتصفح */
 ::picker(select),
 ::-webkit-datetime-edit {
   max-width: 100%;
