@@ -15,6 +15,7 @@ import Select from "@mui/material/Select";
 import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
+
 export default function FormInput() {
   const [status, setStatus, , setGlobalList, , , , , , setOpen, ,] =
     useContext(DataContext);
@@ -82,8 +83,12 @@ export default function FormInput() {
             variant="outlined"
             type="date"
             focused
+            fullWidth
             value={status.date}
             onChange={(ev) => handleChangeDate(ev)}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <Stack className="" sx={{}}>
             <FormControl
