@@ -1,7 +1,7 @@
 # DO IT — Task Management App 🚀
 A modern, glassmorphic task management application built with React for a sleek, responsive user experience.
 
-## 🔗  [Live Demo:](https://doit-taskmanager.netlify.app/))
+## 🔗  [Live Dimo »](https://doit-taskmanger.vercel.app/))
 ## 🛠️ Tech Stack
 Core: React.js, JavaScript (ES6+), HTML5/CSS3.
 ## ✨ Key Features
