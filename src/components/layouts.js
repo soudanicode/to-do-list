@@ -2,14 +2,14 @@ import "../App.css";
 import React, { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
+import { SnackBarProvider } from "../contexts/snackBarContext";
 // Motion Fremwork
 // componenets
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
-import Snackbar from "@mui/material/Snackbar";
 const theme = createTheme({
   palette: {
     primary: {
@@ -76,108 +76,72 @@ export default function Layout() {
     localStorage.setItem("checked_list", JSON.stringify(checked));
   }, [checked]);
 
-  // HANDLER EVENTS
-  // create HANDLE DELETE FUNCTION
-  const handleDelete = (id) => {
-    const newList = [...globalList];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of newList) {
-      if (task.id === id) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    newList.splice(currentIndex, 1);
-    setGlobalList(newList);
-  };
-  // create HANDLE EDIT FUNCTION
-  const handleEdit = (task) => {
-    setStatus((preventStatus) => ({
-      ...preventStatus,
-      name: task.name,
-      date: task.date,
-      id: task.id,
-      priority: task.priority,
-    }));
-  };
-  // for Snackbar
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
-
   return (
     <>
       <ThemeProvider theme={theme}>
-        <DataContext.Provider
-          value={[
-            status,
-            setStatus,
-            globalList,
-            setGlobalList,
-            checked,
-            setChecked,
-            handleDelete,
-            handleEdit,
-            open,
-            setOpen,
-            handleClose,
-          ]}
-        >
-          <Snackbar
-            open={open}
-            autoHideDuration={4000}
-            onClose={handleClose}
-            message="A new task has been added"
-          />
-          <Container id="container" maxWidth="" sx={{ padding: { xs: "3px" } }}>
-            <Box
-              className="contentBox glass-card"
-              sx={{
-                height: { xs: "90vh" },
-                padding: { xs: "8px 8px", sm: "10px", md: "20px" },
-              }}
+        <SnackBarProvider>
+          <DataContext.Provider
+            value={[
+              status,
+              setStatus,
+              globalList,
+              setGlobalList,
+              checked,
+              setChecked,
+            ]}
+          >
+            <Container
+              id="container"
+              maxWidth=""
+              sx={{ padding: { xs: "3px" } }}
             >
-              <Stack spacing={5}>
-                <Stack
-                  spacing={3}
-                  sx={{ justifyContent: "center", alignItems: "center" }}
-                >
-                  <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                    alt="Check"
-                    width="60"
-                  />
-                  <Typography
-                    variant="h3"
-                    component="h3"
-                    sx={{ fontSize: "", textAlign: "center", color: "#dcdbdd" }}
+              <Box
+                className="contentBox glass-card"
+                sx={{
+                  height: { xs: "90vh" },
+                  padding: { xs: "8px 8px", sm: "10px", md: "20px" },
+                }}
+              >
+                <Stack spacing={5}>
+                  <Stack
+                    spacing={3}
+                    sx={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    DO<span className="symbol">✔</span>T
-                  </Typography>
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                      alt="Check"
+                      width="60"
+                    />
+                    <Typography
+                      variant="h3"
+                      component="h3"
+                      sx={{
+                        fontSize: "",
+                        textAlign: "center",
+                        color: "#dcdbdd",
+                      }}
+                    >
+                      DO<span className="symbol">✔</span>T
+                    </Typography>
+                  </Stack>
+                  <Outlet />
                 </Stack>
-                <Outlet />
-              </Stack>
-            </Box>
-            <Typography
-              variant="caption"
-              sx={{
-                display: "block",
-                textAlign: "center",
-                mt: 1,
-                color: "rgba(255, 255, 255, 0.6)",
-                fontSize: "0.8rem",
-              }}
-            >
-              Designed & Developed with ❤️ by «sdnMostaf»
-            </Typography>
-          </Container>
-        </DataContext.Provider>
+              </Box>
+              <Typography
+                variant="caption"
+                sx={{
+                  display: "block",
+                  textAlign: "center",
+                  mt: 1,
+                  color: "rgba(255, 255, 255, 0.6)",
+                  fontSize: "0.8rem",
+                }}
+              >
+                Designed & Developed with ❤️ by «sdnMostaf»
+              </Typography>
+            </Container>
+          </DataContext.Provider>
+        </SnackBarProvider>
       </ThemeProvider>
     </>
   );

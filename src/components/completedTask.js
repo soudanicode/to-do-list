@@ -12,16 +12,35 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
+import { SnackBarContext } from "../contexts/snackBarContext";
+
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function CompleteTask() {
-  const [, , globalList, , checked, , handleDelete] = useContext(DataContext);
+  const { showHideSnackbar } = useContext(SnackBarContext);
+
+  const [, , globalList, setGlobalList, checked] = useContext(DataContext);
+  // create HANDLE DELETE FUNCTION
+  const handleDelete = (id) => {
+    const newList = [...globalList];
+    let counter = 0;
+    let currentIndex = 0;
+    for (let task of newList) {
+      if (task.id === id) {
+        currentIndex = counter;
+      }
+      counter++;
+    }
+    newList.splice(currentIndex, 1);
+    setGlobalList(newList);
+    showHideSnackbar("remov");
+  };
   return (
     <>
       <List

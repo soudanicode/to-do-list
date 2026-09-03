@@ -1,7 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
 import { Link, useParams } from "react-router-dom";
 // copmonenets
 import Box from "@mui/material/Box";
@@ -15,8 +15,11 @@ import Select from "@mui/material/Select";
 import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
+import { SnackBarContext } from "../contexts/snackBarContext";
 
 export default function EditTask() {
+  const { showHideSnackbar } = useContext(SnackBarContext);
+
   const [status, setStatus, globalList, setGlobalList, , , , , , , ,] =
     useContext(DataContext);
 
@@ -59,6 +62,7 @@ export default function EditTask() {
       date: new Date().toISOString().split("T")[0],
       priority: "m",
     }));
+    showHideSnackbar("The task has been modified");
   };
 
   return (

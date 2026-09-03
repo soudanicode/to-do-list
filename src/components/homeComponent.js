@@ -1,7 +1,7 @@
 import "../App.css";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
 import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";

@@ -1,7 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
 import { Link } from "react-router-dom";
 // copmonenets
 import Box from "@mui/material/Box";
@@ -15,11 +15,28 @@ import Select from "@mui/material/Select";
 import Badge from "@mui/material/Badge";
 import CancelIcon from "@mui/icons-material/Cancel";
 import AddIcon from "@mui/icons-material/Add";
+import { SnackBarContext } from "../contexts/snackBarContext";
 
 export default function FormInput() {
-  const [status, setStatus, , setGlobalList, , , , , , setOpen, ,] =
-    useContext(DataContext);
-
+  const [status, setStatus, , setGlobalList, , , , ,] = useContext(DataContext);
+  const { showHideSnackbar } = useContext(SnackBarContext);
+  // create HANDLE SUBMIT FUNCTION
+  const newTask = {
+    ...status,
+    id: Date.now(),
+  };
+  const handleSubmit = () => {
+    setGlobalList((prevList) => [newTask, ...prevList]);
+    // clean input form
+    setStatus((prevStatus) => ({
+      ...prevStatus,
+      name: "",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    }));
+    showHideSnackbar("You have added a new task ");
+    // setOpen(true);
+  };
   // handleFunctions
   const handleChangeDate = (ev) => {
     const { value } = ev.target;
@@ -33,24 +50,6 @@ export default function FormInput() {
   const handleChangeSelect = (ev) => {
     const { value } = ev.target;
     setStatus((prevStatus) => ({ ...prevStatus, priority: value }));
-  };
-
-  // ========new task
-  const newTask = {
-    ...status,
-    id: Date.now(),
-  };
-  // ! Functional setState [info]
-  const handleSubmit = () => {
-    setGlobalList((prevList) => [newTask, ...prevList]);
-    // clean input form
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      name: "",
-      date: new Date().toISOString().split("T")[0],
-      priority: "m",
-    }));
-    setOpen(true);
   };
 
   return (

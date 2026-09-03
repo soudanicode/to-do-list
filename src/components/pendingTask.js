@@ -1,6 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
+
 // ___ MUI Components
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -20,10 +21,10 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import FlagIcon from "@mui/icons-material/Flag";
-import DataContext from "../dataContext";
+import DataContext from "../contexts/dataContext";
 
 export default function PendingTask() {
-  const [, , globalList, , checked, setChecked, handleDelete, handleEdit] =
+  const [, setStatus, globalList, setGlobalList, checked, setChecked, ,] =
     useContext(DataContext);
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
@@ -35,6 +36,30 @@ export default function PendingTask() {
       updateList.splice(currentIndex, 1);
     }
     setChecked(updateList);
+  };
+  // create HANDLE DELETE FUNCTION
+  const handleDelete = (id) => {
+    const newList = [...globalList];
+    let counter = 0;
+    let currentIndex = 0;
+    for (let task of newList) {
+      if (task.id === id) {
+        currentIndex = counter;
+      }
+      counter++;
+    }
+    newList.splice(currentIndex, 1);
+    setGlobalList(newList);
+  };
+  // create HANDLE EDIT FUNCTION
+  const handleEdit = (task) => {
+    setStatus((preventStatus) => ({
+      ...preventStatus,
+      name: task.name,
+      date: task.date,
+      id: task.id,
+      priority: task.priority,
+    }));
   };
   return (
     <>
