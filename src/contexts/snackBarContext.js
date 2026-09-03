@@ -12,7 +12,7 @@ export const SnackBarProvider = ({ children }) => {
       setOpen(false);
     }, 2000);
   };
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const [message, setMessage] = React.useState("");
   return (
     <SnackBarContext.Provider value={{ showHideSnackbar }}>
