@@ -84,7 +84,6 @@ export default function HomeInterface() {
                   padding: "0px 14px",
                   letterSpacing: "0.028em",
                   color: "#f4f4f4",
-                  // borderRadius: "50vh",
                 },
               }}
             >

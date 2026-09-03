@@ -52,7 +52,6 @@ const theme = createTheme({
 
 export default function Layout() {
   // use states data
-  const [open, setOpen] = React.useState(false);
   const [globalList, setGlobalList] = React.useState(() => {
     const savedTask = localStorage.getItem("my_tasks");
     return savedTask ? JSON.parse(savedTask) : [];
@@ -103,6 +102,8 @@ export default function Layout() {
     }));
   };
   // for Snackbar
+  const [open, setOpen] = React.useState(false);
+
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -138,7 +139,6 @@ export default function Layout() {
             <Box
               className="contentBox glass-card"
               sx={{
-                // width: { xs: "97%", sm: "50%" },
                 height: { xs: "90vh" },
                 padding: { xs: "8px 8px", sm: "10px", md: "20px" },
               }}
