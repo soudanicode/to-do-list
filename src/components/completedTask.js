@@ -14,8 +14,6 @@ import FormGroup from "@mui/material/FormGroup";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { SnackBarContext } from "../contexts/snackBarContext";
-import { Box } from "@mui/material";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
