@@ -98,6 +98,7 @@ export default function HomeInterface() {
               </Link>
             </ToggleButtonGroup>
           </Stack>
+
           <Outlet />
         </Stack>
       </Box>

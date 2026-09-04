@@ -76,6 +76,21 @@ export default function Layout() {
     localStorage.setItem("checked_list", JSON.stringify(checked));
   }, [checked]);
 
+  // === Function to delete the task from the checklist on local storage
+  function deleteTask_inStorage(id) {
+    const updateList = [...checked];
+    let counter = 0;
+    let currentIndex = 0;
+    for (let task of updateList) {
+      if (task === id) {
+        currentIndex = counter;
+      }
+      counter++;
+    }
+    updateList.splice(currentIndex, 1);
+    setChecked(updateList);
+  }
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -88,6 +103,7 @@ export default function Layout() {
               setGlobalList,
               checked,
               setChecked,
+              deleteTask_inStorage,
             ]}
           >
             <Container
@@ -137,7 +153,7 @@ export default function Layout() {
                   fontSize: "0.8rem",
                 }}
               >
-                Designed & Developed with ❤️ by «sdnMostaf»
+                Designed & Developed with ❤️ by «sdnMostafa»
               </Typography>
             </Container>
           </DataContext.Provider>

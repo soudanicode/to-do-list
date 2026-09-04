@@ -1,6 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
+import { MotivationText } from "./motivationText";
 // ___ MUI Components
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -13,6 +14,8 @@ import FormGroup from "@mui/material/FormGroup";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import { SnackBarContext } from "../contexts/snackBarContext";
+import { Box } from "@mui/material";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
@@ -25,7 +28,8 @@ import Tooltip from "@mui/material/Tooltip";
 export default function CompleteTask() {
   const { showHideSnackbar } = useContext(SnackBarContext);
 
-  const [, , globalList, setGlobalList, checked] = useContext(DataContext);
+  const [, , globalList, setGlobalList, checked, , deleteTask_inStorage] =
+    useContext(DataContext);
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
     const newList = [...globalList];
@@ -39,6 +43,7 @@ export default function CompleteTask() {
     }
     newList.splice(currentIndex, 1);
     setGlobalList(newList);
+    deleteTask_inStorage(id);
     showHideSnackbar("remov");
   };
   return (
@@ -47,6 +52,17 @@ export default function CompleteTask() {
         className="w-list w-list hide-scrollbar p-8"
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
+        {/* === MTV TEXT */}
+        {checked.length === 0 && (
+          <MotivationText
+            tasks={globalList}
+            typography={{
+              firstText: "No completed tasks yet",
+              secondaryText: "",
+            }}
+          />
+        )}
+        {/* === MTV TEXT */}
         {Array.isArray(globalList) &&
           globalList
             .filter(

@@ -1,6 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
+import { MotivationText } from "./motivationText";
 
 // ___ MUI Components
 import List from "@mui/material/List";
@@ -24,7 +25,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import DataContext from "../contexts/dataContext";
 
 export default function PendingTask() {
-  const [, setStatus, globalList, setGlobalList, checked, setChecked, ,] =
+  const [, setStatus, globalList, setGlobalList, checked, setChecked] =
     useContext(DataContext);
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
@@ -67,6 +68,17 @@ export default function PendingTask() {
         className="w-list hide-scrollbar p-8"
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
+        {/* === MTV TEXT */}
+        {globalList.length === 0 && (
+          <MotivationText
+            typography={{
+              firstText: "No tasks in progress",
+              secondaryText:
+                "Do you want to get something done? Click the add button above",
+            }}
+          />
+        )}
+        {/* === MTV TEXT */}
         {Array.isArray(globalList) &&
           globalList
             .filter(

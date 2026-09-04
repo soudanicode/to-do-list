@@ -1,6 +1,7 @@
 import "../App.css";
 import React from "react";
 import { useContext } from "react";
+import { MotivationText } from "./motivationText";
 // ___ MUI Components
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -38,8 +39,15 @@ export default function Tasks() {
 }
 
 export function CheckboxList() {
-  const [, setStatus, globalList, setGlobalList, checked, setChecked] =
-    useContext(DataContext);
+  const [
+    ,
+    setStatus,
+    globalList,
+    setGlobalList,
+    checked,
+    setChecked,
+    deleteTask_inStorage,
+  ] = useContext(DataContext);
 
   const handleToggle = (id) => {
     const currentList = Array.isArray(checked) ? checked : [];
@@ -65,6 +73,7 @@ export function CheckboxList() {
     }
     newList.splice(currentIndex, 1);
     setGlobalList(newList);
+    deleteTask_inStorage(id);
   };
   // create HANDLE EDIT FUNCTION
   const handleEdit = (task) => {
@@ -85,6 +94,17 @@ export function CheckboxList() {
         marginTop: "10px",
       }}
     >
+      {/* === MTV TEXT */}
+      {globalList.length === 0 && (
+        <MotivationText
+          typography={{
+            firstText: "No tasks for now",
+            secondaryText: "Click the button above to create your first task",
+          }}
+        />
+      )}
+      {/* === MTV TEXT */}
+
       {Array.isArray(globalList) &&
         globalList.map((task) => {
           let key = task.id;
