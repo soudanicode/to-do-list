@@ -123,11 +123,7 @@ export default function Layout() {
                     spacing={3}
                     sx={{ justifyContent: "center", alignItems: "center" }}
                   >
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
-                      alt="Check"
-                      width="60"
-                    />
+                    <img src="/favicon.ico" alt="Check" width="60" />
                     <Typography
                       variant="h3"
                       component="h3"
