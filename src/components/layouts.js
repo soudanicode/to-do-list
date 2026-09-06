@@ -1,11 +1,15 @@
 import "../App.css";
-import React, { useEffect } from "react";
+import React, { useEffect, useReducer } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import { Outlet } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+// FILES IMPORTED
 import DataContext from "../contexts/dataContext";
-import { SnackBarProvider } from "../contexts/snackBarContext";
+import mainReducer from "../redusers/mainReducer";
 // Motion Fremwork
 // componenets
+import { SnackBarProvider } from "../contexts/snackBarContext";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
@@ -49,63 +53,58 @@ const theme = createTheme({
     },
   },
 });
+/// ٭٭٭ REDUSER CODE٭٭٭
 
 export default function Layout() {
-  // use states data
-  const [globalList, setGlobalList] = React.useState(() => {
-    const savedTask = localStorage.getItem("my_tasks");
-    return savedTask ? JSON.parse(savedTask) : [];
-  });
-  const [checked, setChecked] = React.useState(() => {
-    const savedChecked = localStorage.getItem("checked_list");
-    return savedChecked ? JSON.parse(savedChecked) : [];
-  });
-  const [status, setStatus] = React.useState({
-    name: "",
-    date: new Date().toISOString().split("T")[0],
-    priority: "m",
-  });
+  /// ٭٭٭ REDUSER CODE٭٭٭
+  const initialState = {
+    globalList: [
+      {
+        id: uuidv4(),
+        name: "test",
+        date: new Date().toISOString().split("T")[0],
+        priority: "m",
+      },
+    ],
+    formOutputs: {
+      name: "test",
+      date: new Date().toISOString().split("T")[0],
+      priority: "m",
+    },
+    checkedList: [],
+  };
+  const [state, disdispatch] = useReducer(mainReducer, initialState);
 
   // === GET DATA IN  LOCALE STORAGE
   // for globale list
-  useEffect(() => {
-    localStorage.setItem("my_tasks", JSON.stringify(globalList));
-  }, [globalList]);
-  // for Cheked
-  useEffect(() => {
-    localStorage.setItem("checked_list", JSON.stringify(checked));
-  }, [checked]);
+  // useEffect(() => {
+  //   localStorage.setItem("my_tasks", JSON.stringify(globalList));
+  // }, [globalList]);
+  // // for Cheked
+  // useEffect(() => {
+  //   localStorage.setItem("checked_list", JSON.stringify(checked));
+  // }, [checked]);
 
   // === Function to delete the task from the checklist on local storage
-  function deleteTask_inStorage(id) {
-    const updateList = [...checked];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of updateList) {
-      if (task === id) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    updateList.splice(currentIndex, 1);
-    setChecked(updateList);
-  }
+  // function deleteTask_inStorage(id) {
+  //   const updateList = [...state.checkedList];
+  //   let counter = 0;
+  //   let currentIndex = 0;
+  //   for (let task of updateList) {
+  //     if (task === id) {
+  //       currentIndex = counter;
+  //     }
+  //     counter++;
+  //   }
+  //   updateList.splice(currentIndex, 1);
+  //   setChecked(updateList);
+  // }
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <SnackBarProvider>
-          <DataContext.Provider
-            value={[
-              status,
-              setStatus,
-              globalList,
-              setGlobalList,
-              checked,
-              setChecked,
-              deleteTask_inStorage,
-            ]}
-          >
+          <DataContext.Provider value={[state, disdispatch]}>
             <Container
               id="container"
               maxWidth=""

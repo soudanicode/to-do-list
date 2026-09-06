@@ -39,51 +39,38 @@ export default function Tasks() {
 }
 
 export function CheckboxList() {
-  const [
-    ,
-    setStatus,
-    globalList,
-    setGlobalList,
-    checked,
-    setChecked,
-    deleteTask_inStorage,
-  ] = useContext(DataContext);
+  const [state, dispatch, , , deleteTask_inStorage] = useContext(DataContext);
 
   const handleToggle = (id) => {
-    const currentList = Array.isArray(checked) ? checked : [];
-    const currentIndex = checked.indexOf(id);
-    const updateList = [...currentList];
-    if (currentIndex === -1) {
-      updateList.unshift(id);
-    } else {
-      updateList.splice(currentIndex, 1);
-    }
-    setChecked(updateList);
+    dispatch({ type: "CHECKING_TASK", payload: { id } });
   };
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
-    const newList = [...globalList];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of newList) {
-      if (task.id === id) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    newList.splice(currentIndex, 1);
-    setGlobalList(newList);
-    deleteTask_inStorage(id);
+    dispatch({ type: "DELETED_TASK", payload: { id, deleteTask_inStorage } });
+
+    // const newList = [...globalList];
+    // let counter = 0;
+    // let currentIndex = 0;
+    // for (let task of newList) {
+    //   if (task.id === id) {
+    //     currentIndex = counter;
+    //   }
+    //   counter++;
+    // }
+    // newList.splice(currentIndex, 1);
+    // setGlobalList(newList);
+    // deleteTask_inStorage(id);
   };
   // create HANDLE EDIT FUNCTION
   const handleEdit = (task) => {
-    setStatus((preventStatus) => ({
-      ...preventStatus,
-      name: task.name,
-      date: task.date,
-      id: task.id,
-      priority: task.priority,
-    }));
+    dispatch({ type: "EDIT_TASK", payload: { task } });
+    // setStatus((preventStatus) => ({
+    //   ...preventStatus,
+    //   name: task.name,
+    //   date: task.date,
+    //   id: task.id,
+    //   priority: task.priority,
+    // }));
   };
 
   return (
@@ -95,7 +82,7 @@ export function CheckboxList() {
       }}
     >
       {/* === MTV TEXT */}
-      {globalList.length === 0 && (
+      {state.globalList.length === 0 && (
         <MotivationText
           typography={{
             firstText: "No tasks for now",
@@ -105,10 +92,11 @@ export function CheckboxList() {
       )}
       {/* === MTV TEXT */}
 
-      {Array.isArray(globalList) &&
-        globalList.map((task) => {
+      {Array.isArray(state.globalList) &&
+        state.globalList.map((task) => {
           let key = task.id;
-          const isChecked = Array.isArray(checked) && checked.includes(key);
+          const isChecked =
+            Array.isArray(state.checkedList) && state.checkedList.includes(key);
           return (
             <ListItem
               key={task.id}

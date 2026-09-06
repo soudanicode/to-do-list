@@ -18,38 +18,27 @@ import AddIcon from "@mui/icons-material/Add";
 import { SnackBarContext } from "../contexts/snackBarContext";
 
 export default function FormInput() {
-  const [status, setStatus, , setGlobalList, , , , ,] = useContext(DataContext);
+  const [state, dispatch, , , , , , ,] = useContext(DataContext);
   const { showHideSnackbar } = useContext(SnackBarContext);
-  // create HANDLE SUBMIT FUNCTION
-  const newTask = {
-    ...status,
-    id: Date.now(),
-  };
-  const handleSubmit = () => {
-    setGlobalList((prevList) => [newTask, ...prevList]);
-    // clean input form
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      name: "",
-      date: new Date().toISOString().split("T")[0],
-      priority: "m",
-    }));
-    showHideSnackbar("You have added a new task ");
-    // setOpen(true);
-  };
   // handleFunctions
+  const handleSubmit = () => {
+    showHideSnackbar("add task");
+    dispatch({
+      type: "ADD_TASK",
+    });
+  };
   const handleChangeDate = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, date: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_DATE", payload: value });
   };
   const handleChangeName = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, name: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_NAME", payload: value });
   };
 
   const handleChangeSelect = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, priority: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_PRIORITY", payload: value });
   };
 
   return (
@@ -71,7 +60,7 @@ export default function FormInput() {
             color="error"
             variant="outlined"
             required
-            value={status.name}
+            value={state?.formOutputs?.name ?? "  "}
             onChange={(ev) => {
               handleChangeName(ev);
             }}
@@ -82,12 +71,10 @@ export default function FormInput() {
             variant="outlined"
             type="date"
             focused
-            fullWidth
-            value={status.date}
+            value={
+              state?.formOutputs?.date ?? new Date().toISOString().split("T")[0]
+            }
             onChange={(ev) => handleChangeDate(ev)}
-            InputLabelProps={{
-              shrink: true,
-            }}
           />
           <Stack className="" sx={{}}>
             <FormControl
@@ -104,7 +91,7 @@ export default function FormInput() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={status.priority}
+                value={state?.formOutputs?.priority ?? "m"}
                 label="priority"
                 onChange={(ev) => handleChangeSelect(ev)}
               >
@@ -133,7 +120,7 @@ export default function FormInput() {
               variant="outlined"
               color="success"
               size="small"
-              disabled={status.name !== "" ? false : true}
+              disabled={state?.formOutputs?.name !== "" ? false : true}
               onClick={() => {
                 handleSubmit();
               }}

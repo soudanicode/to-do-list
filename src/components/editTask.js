@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 // copmonenets
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { Button } from "@mui/material";
+import { Button, dispatch } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -18,51 +18,34 @@ import AddIcon from "@mui/icons-material/Add";
 import { SnackBarContext } from "../contexts/snackBarContext";
 
 export default function EditTask() {
+  const params = useParams();
   const { showHideSnackbar } = useContext(SnackBarContext);
 
-  const [status, setStatus, globalList, setGlobalList, , , , , , , ,] =
-    useContext(DataContext);
+  const [state, dispatch, , , , , , , , ,] = useContext(DataContext);
 
   // handleFunctions
   const handleChangeDate = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, date: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_DATE", payload: value });
   };
   const handleChangeName = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, name: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_NAME", payload: value });
   };
 
   const handleChangeSelect = (ev) => {
-    const { value } = ev.target;
-    setStatus((prevStatus) => ({ ...prevStatus, priority: value }));
+    const value = ev.target.value;
+    dispatch({ type: "SET_PRIORITY", payload: value });
   };
-  // ! Functional setState [info]
-  const params = useParams();
+
   const handleSubmit = () => {
-    const newList = [...globalList];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of globalList) {
-      if (task.id === Number(params.title)) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    // ========new task
-    const newTask = {
-      ...status,
-    };
-    newList[currentIndex] = newTask;
-    setGlobalList(newList);
-    // clean input form
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      name: "",
-      date: new Date().toISOString().split("T")[0],
-      priority: "m",
-    }));
     showHideSnackbar("The task has been modified");
+    dispatch({
+      type: "SUBMIT_EDIT",
+      payload: {
+        params,
+      },
+    });
   };
 
   return (
@@ -84,7 +67,7 @@ export default function EditTask() {
             color="error"
             variant="outlined"
             required
-            value={status.name}
+            value={state?.formOutputs?.name ?? "  "}
             onChange={(ev) => {
               handleChangeName(ev);
             }}
@@ -95,7 +78,9 @@ export default function EditTask() {
             variant="outlined"
             type="date"
             focused
-            value={status.date}
+            value={
+              state?.formOutputs?.date ?? new Date().toISOString().split("T")[0]
+            }
             onChange={(ev) => handleChangeDate(ev)}
           />
           <Stack className="" sx={{}}>
@@ -113,7 +98,7 @@ export default function EditTask() {
               <Select
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={status.priority}
+                value={state?.formOutputs?.priority ?? "m"}
                 label="priority"
                 onChange={(ev) => handleChangeSelect(ev)}
               >
@@ -142,7 +127,7 @@ export default function EditTask() {
               variant="outlined"
               color="success"
               size="small"
-              disabled={status.name !== "" ? false : true}
+              disabled={state?.formOutputs?.name !== "" ? false : true}
               onClick={() => {
                 handleSubmit();
               }}
