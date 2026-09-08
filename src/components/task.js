@@ -16,7 +16,6 @@ import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import FlagIcon from "@mui/icons-material/Flag";
 import Tooltip from "@mui/material/Tooltip";
-
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -24,9 +23,7 @@ import EditNoteOutlinedIcon from "@mui/icons-material/EditNoteOutlined";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import DataContext from "../contexts/dataContext";
-
 import { Link } from "react-router-dom";
-// ===========
 
 export default function Tasks() {
   return (
@@ -39,38 +36,17 @@ export default function Tasks() {
 }
 
 export function CheckboxList() {
-  const [state, dispatch, , , deleteTask_inStorage] = useContext(DataContext);
-
+  const [state, dispatch] = useContext(DataContext);
   const handleToggle = (id) => {
     dispatch({ type: "CHECKING_TASK", payload: { id } });
   };
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
-    dispatch({ type: "DELETED_TASK", payload: { id, deleteTask_inStorage } });
-
-    // const newList = [...globalList];
-    // let counter = 0;
-    // let currentIndex = 0;
-    // for (let task of newList) {
-    //   if (task.id === id) {
-    //     currentIndex = counter;
-    //   }
-    //   counter++;
-    // }
-    // newList.splice(currentIndex, 1);
-    // setGlobalList(newList);
-    // deleteTask_inStorage(id);
+    dispatch({ type: "DELETED_TASK", payload: { id } });
   };
   // create HANDLE EDIT FUNCTION
   const handleEdit = (task) => {
     dispatch({ type: "EDIT_TASK", payload: { task } });
-    // setStatus((preventStatus) => ({
-    //   ...preventStatus,
-    //   name: task.name,
-    //   date: task.date,
-    //   id: task.id,
-    //   priority: task.priority,
-    // }));
   };
 
   return (

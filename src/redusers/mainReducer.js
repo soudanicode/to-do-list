@@ -1,14 +1,5 @@
-import { useReducer, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
-const initialStates = {
-  tasksList: [],
-  formOutputs: {
-    name: "",
-    date: new Date().toISOString().split("T")[0],
-    priority: "m",
-  },
-  checkedList: [],
-};
+
 export default function mainReducer(state, action) {
   const { type, payload } = action;
   const newList = [...state.globalList];
@@ -24,29 +15,7 @@ export default function mainReducer(state, action) {
         ...state,
         formOutputs: { ...state.formOutputs, priority: payload },
       };
-    //»»»
-    case "SUBMIT_EDIT":
-      for (let task of [...state.globalList]) {
-        if (task.id === Number(payload.params)) {
-          currentIndex = counter;
-          counter = 0;
-        }
-        counter++;
-      }
-      const editTask = {
-        ...state.formOutputs,
-      };
-      newList[currentIndex] = editTask;
 
-      return {
-        ...state,
-        globalList: newList,
-        formOutputs: {
-          name: "",
-          date: new Date().toISOString().split("T")[0],
-          priority: "m",
-        },
-      };
     // »»»»»»
     case "ADD_TASK":
       const newTask = { ...state.formOutputs, id: uuidv4() };
@@ -110,6 +79,32 @@ export default function mainReducer(state, action) {
           date: payload.task.date,
           id: payload.task.id,
           priority: payload.task.priority,
+        },
+      };
+    // »»»»»»
+
+    case "SUBMIT_EDIT":
+      for (let task of [...state.globalList]) {
+        if (task.id === payload.params.title) {
+          currentIndex = counter;
+          break;
+        }
+        counter++;
+      }
+      // console.log(counter);
+
+      const editTask = {
+        ...state.formOutputs,
+      };
+      newList[currentIndex] = editTask;
+
+      return {
+        ...state,
+        globalList: newList,
+        formOutputs: {
+          name: "",
+          date: new Date().toISOString().split("T")[0],
+          priority: "m",
         },
       };
 

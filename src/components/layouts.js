@@ -1,6 +1,5 @@
 import "../App.css";
 import React, { useEffect, useReducer } from "react";
-import { v4 as uuidv4 } from "uuid";
 
 import { Outlet } from "react-router-dom";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -14,6 +13,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
+// CREATE TEAM
 const theme = createTheme({
   palette: {
     primary: {
@@ -53,58 +53,34 @@ const theme = createTheme({
     },
   },
 });
-/// ٭٭٭ REDUSER CODE٭٭٭
 
 export default function Layout() {
   /// ٭٭٭ REDUSER CODE٭٭٭
+  const initialize = (defaultState) => {
+    const savedState = localStorage.getItem("todo_states");
+    return savedState ? JSON.parse(savedState) : defaultState;
+  };
   const initialState = {
-    globalList: [
-      {
-        id: uuidv4(),
-        name: "test",
-        date: new Date().toISOString().split("T")[0],
-        priority: "m",
-      },
-    ],
+    globalList: [],
     formOutputs: {
-      name: "test",
+      name: "",
       date: new Date().toISOString().split("T")[0],
       priority: "m",
     },
     checkedList: [],
   };
-  const [state, disdispatch] = useReducer(mainReducer, initialState);
+  const [state, dispatch] = useReducer(mainReducer, initialize(initialState));
 
-  // === GET DATA IN  LOCALE STORAGE
-  // for globale list
-  // useEffect(() => {
-  //   localStorage.setItem("my_tasks", JSON.stringify(globalList));
-  // }, [globalList]);
-  // // for Cheked
-  // useEffect(() => {
-  //   localStorage.setItem("checked_list", JSON.stringify(checked));
-  // }, [checked]);
-
-  // === Function to delete the task from the checklist on local storage
-  // function deleteTask_inStorage(id) {
-  //   const updateList = [...state.checkedList];
-  //   let counter = 0;
-  //   let currentIndex = 0;
-  //   for (let task of updateList) {
-  //     if (task === id) {
-  //       currentIndex = counter;
-  //     }
-  //     counter++;
-  //   }
-  //   updateList.splice(currentIndex, 1);
-  //   setChecked(updateList);
-  // }
+  // === GET states IN  LOCALE STORAGE
+  useEffect(() => {
+    localStorage.setItem("todo_states", JSON.stringify(state));
+  }, [state.globalList, state.checkedList]);
 
   return (
     <>
       <ThemeProvider theme={theme}>
         <SnackBarProvider>
-          <DataContext.Provider value={[state, disdispatch]}>
+          <DataContext.Provider value={[state, dispatch]}>
             <Container
               id="container"
               maxWidth=""

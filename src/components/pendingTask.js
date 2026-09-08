@@ -2,7 +2,6 @@ import "../App.css";
 import React from "react";
 import { useContext } from "react";
 import { MotivationText } from "./motivationText";
-
 // ___ MUI Components
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -25,42 +24,17 @@ import FlagIcon from "@mui/icons-material/Flag";
 import DataContext from "../contexts/dataContext";
 
 export default function PendingTask() {
-  const [, setStatus, globalList, setGlobalList, checked, setChecked] =
-    useContext(DataContext);
+  const [state, dispatch] = useContext(DataContext);
   const handleToggle = (id) => {
-    const currentList = Array.isArray(checked) ? checked : [];
-    const currentIndex = checked.indexOf(id);
-    const updateList = [...currentList];
-    if (currentIndex === -1) {
-      updateList.push(id);
-    } else {
-      updateList.splice(currentIndex, 1);
-    }
-    setChecked(updateList);
+    dispatch({ type: "CHECKING_TASK", payload: { id } });
   };
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
-    const newList = [...globalList];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of newList) {
-      if (task.id === id) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    newList.splice(currentIndex, 1);
-    setGlobalList(newList);
+    dispatch({ type: "DELETED_TASK", payload: { id } });
   };
   // create HANDLE EDIT FUNCTION
   const handleEdit = (task) => {
-    setStatus((preventStatus) => ({
-      ...preventStatus,
-      name: task.name,
-      date: task.date,
-      id: task.id,
-      priority: task.priority,
-    }));
+    dispatch({ type: "EDIT_TASK", payload: { task } });
   };
   return (
     <>
@@ -69,7 +43,7 @@ export default function PendingTask() {
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
         {/* === MTV TEXT */}
-        {globalList.length === 0 && (
+        {state.globalList.length === 0 && (
           <MotivationText
             typography={{
               firstText: "No tasks in progress",
@@ -79,14 +53,18 @@ export default function PendingTask() {
           />
         )}
         {/* === MTV TEXT */}
-        {Array.isArray(globalList) &&
-          globalList
+        {Array.isArray(state.globalList) &&
+          state.globalList
             .filter(
-              (task) => Array.isArray(checked) && !checked.includes(task.id),
+              (task) =>
+                Array.isArray(state.checkedList) &&
+                !state.checkedList.includes(task.id),
             )
             .map((task) => {
               let key = task.id;
-              const isChecked = Array.isArray(checked) && checked.includes(key);
+              const isChecked =
+                Array.isArray(state.checkedList) &&
+                state.checkedList.includes(key);
 
               return (
                 <ListItem

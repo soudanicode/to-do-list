@@ -13,8 +13,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
 import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { SnackBarContext } from "../contexts/snackBarContext";
-
 // _____ Icon
 import DeleteForeverOutlinedIcon from "@mui/icons-material/DeleteForeverOutlined";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -24,25 +22,10 @@ import DataContext from "../contexts/dataContext";
 import Tooltip from "@mui/material/Tooltip";
 
 export default function CompleteTask() {
-  const { showHideSnackbar } = useContext(SnackBarContext);
-
-  const [, , globalList, setGlobalList, checked, , deleteTask_inStorage] =
-    useContext(DataContext);
+  const [state, dispatch] = useContext(DataContext);
   // create HANDLE DELETE FUNCTION
   const handleDelete = (id) => {
-    const newList = [...globalList];
-    let counter = 0;
-    let currentIndex = 0;
-    for (let task of newList) {
-      if (task.id === id) {
-        currentIndex = counter;
-      }
-      counter++;
-    }
-    newList.splice(currentIndex, 1);
-    setGlobalList(newList);
-    deleteTask_inStorage(id);
-    showHideSnackbar("remov");
+    dispatch({ type: "DELETED_TASK", payload: { id } });
   };
   return (
     <>
@@ -51,9 +34,9 @@ export default function CompleteTask() {
         sx={{ borderRadius: "10px", marginTop: "10px" }}
       >
         {/* === MTV TEXT */}
-        {checked.length === 0 && (
+        {state.checkedList.length === 0 && (
           <MotivationText
-            tasks={globalList}
+            tasks={state.globalList}
             typography={{
               firstText: "No completed tasks yet",
               secondaryText: "",
@@ -61,14 +44,17 @@ export default function CompleteTask() {
           />
         )}
         {/* === MTV TEXT */}
-        {Array.isArray(globalList) &&
-          globalList
+        {Array.isArray(state.globalList) &&
+          state.globalList
             .filter(
-              (task) => Array.isArray(checked) && checked.includes(task.id),
+              (task) =>
+                Array.isArray(state.checkedList) &&
+                state.checkedList.includes(task.id),
             )
             .map((task) => {
               const isChecked =
-                Array.isArray(checked) && checked.includes(task.id);
+                Array.isArray(state.checkedList) &&
+                state.checkedList.includes(task.id);
 
               return (
                 <ListItem
