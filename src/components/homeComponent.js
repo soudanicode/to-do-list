@@ -9,7 +9,7 @@ import Fab from "@mui/material/Fab";
 import AddTaskIcon from "@mui/icons-material/AddTask";
 import { useContext, useEffect } from "react";
 export default function HomeInterface() {
-  const [, setStatus, , , , , , , , , , ,] = useContext(DataContext);
+  const [, dispatch] = useContext(DataContext);
   const [alignment, setAlignment] = useState(() => {
     const savedAlignment = localStorage.getItem("aligment-butt");
     return savedAlignment ? JSON.parse(savedAlignment) : "all";
@@ -25,14 +25,8 @@ export default function HomeInterface() {
     }
   };
   const handleCancel = useEffect(() => {
-    // clean input form
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      name: "",
-      date: new Date().toISOString().split("T")[0],
-      priority: "m",
-    }));
-  }, [setStatus]);
+    dispatch({ type: "CANCEL_ACTION", payload: {} });
+  }, [dispatch]);
 
   return (
     <>

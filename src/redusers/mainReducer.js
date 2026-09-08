@@ -108,6 +108,17 @@ export default function mainReducer(state, action) {
         },
       };
 
+    case "CANCEL_ACTION":
+      return {
+        ...state,
+        formOutputs: {
+          ...state.formOutputs,
+          name: "",
+          date: new Date().toISOString().split("T")[0],
+          priority: "m",
+        },
+      };
+
     //   END SWITCH
     default:
       return { ...state };

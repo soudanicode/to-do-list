@@ -22,7 +22,7 @@ export default function FormInput() {
   const { showHideSnackbar } = useContext(SnackBarContext);
   // handleFunctions
   const handleSubmit = () => {
-    showHideSnackbar("add task");
+    showHideSnackbar("Task added successfully");
     dispatch({
       type: "ADD_TASK",
     });
